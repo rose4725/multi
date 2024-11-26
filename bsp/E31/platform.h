@@ -152,5 +152,12 @@
 #define PLIC_REG(offset)  _REG32(PLIC_BASE, offset)
 #define DMA_REG(offset)   _REG32(DMA_BASE, offset)
 
+// -----------------------------------------------------------------------------
+// SIGNATURE AND KEY BASE ADDRESSES
+// -----------------------------------------------------------------------------
+#define SIGN_BASE 0x30000000
+#define KEY_BASE  0x30001000
+
+
 
 #endif /* HEXFIVE_PLATFORM_H */

@@ -34,5 +34,24 @@ boot:
 	sw t1, PWM_CMP2(t0)
 	sw t1, PWM_CMP3(t0)
 
+	######################
+	# Secure Boot 
+	la t0, SIGN_BASE	
+	la t1, KEY_BASE
+	jal ra, verify_signature
+	beqz t0, boot_fail
+
+	######################
+
 	# exit to MultiZone
 	ecall
+
+	######################
+	# Secure Boot failure
+boot_fail:
+	la t0, GPIO_BASE
+	# Turn on LED1
+	li t1, 0x1
+	sw t1, GPIO_OUTPUT_VAL(t0)
+	j boot_fail
+	######################

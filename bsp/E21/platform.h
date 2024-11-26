@@ -50,7 +50,7 @@
 #define PWM_COUNT	0x08
 #define PWM_S		0x10
 #define PWM_CMP0	0x20
-#define PWM_CMP1 	0x24	// LED1 Red
+#define  	0x24	// LED1 Red
 #define PWM_CMP2 	0x28	// LED1 Green
 #define PWM_CMP3 	0x2C	// LED1 Blue
 
