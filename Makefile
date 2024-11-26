@@ -30,6 +30,8 @@ export RISCV_ABI
 # Toolchain definitions
 #############################################################
 
+RISCV := C:/SysGCC/risc-v
+
 ifndef RISCV
 $(error RISCV not set)
 endif
@@ -64,6 +66,15 @@ all: clean
 		zone3/zone3.hex \
 		zone4/zone4.hex
 
+# Convert HEX to binary
+	$(OBJCOPY) -I ihex -O binary multizone.hex multizone.bin
+
+# Convert binary to ELF
+	$(CROSS_COMPILE)ld -o multizone.elf -b binary multizone.bin
+
+# Disassemble the ELF file
+	$(OBJDUMP) -D multizone.elf > objdump.txt
+
 .PHONY: clean
 clean: 
 	$(MAKE) -C zone1 clean
@@ -72,17 +83,20 @@ clean:
 	$(MAKE) -C zone3.1 clean
 	$(MAKE) -C zone4 clean
 	$(MAKE) -C bsp/$(BOARD)/boot clean
-	rm -f multizone.hex multizone.bin
+# 	objdump
+	rm -f multizone.hex multizone.bin objdump.txt
 
 #############################################################
 # Load to flash
 #############################################################
 
+OPENOCD := C:/JangM/OpenOCD-20240916-0.12.0/bin/openocd.exe
+
+
 ifndef OPENOCD
     $(error OPENOCD not set)
 endif
 
-OPENOCD := $(abspath $(OPENOCD))/bin/openocd
 
 OPENOCDCFG ?= bsp/$(BOARD)/openocd.cfg
 OPENOCDARGS += -f $(OPENOCDCFG)
@@ -114,3 +128,13 @@ load:
 	$(GDB) multizone.hex $(GDB_LOAD_ARGS) $(GDB_LOAD_CMDS)
 
 endif
+
+.PHONY: qemu
+qemu: all
+	"C:/JangM/qemu/qemu-system-riscv64" \
+	    -machine virt \
+	    -nographic \
+	    -smp 4 \
+	    -m 2048 \
+	    -bios default \
+	    -kernel multizone.elf

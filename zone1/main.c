@@ -661,8 +661,15 @@ int main (void) {
     printf("the evaluation SDK documentation. The commercial version of the     \n");
     printf("software does not have these restrictions.                          \n");
     printf("====================================================================\n");
-
+	
+	//printf("print sys info start\n");
     print_sys_info();
+	//printf("print sys info end\n");
+	/**********************************************************/
+	//printf("print pmp start\n");
+	//print_pmp();
+	//printf("print pmp end\n");
+	/**********************************************************/
 
 	write(1, "\n\rZ1 > ", 7);
 

@@ -9,9 +9,9 @@ _start:
 	.cfi_undefined ra
 
     /* setup trap vector */
-    la a0, _mtvec
-    csrw mtvec, a0
-    csrs mtvec, 1
+    la a0, _mtvec		// Load addr of _mtvec(label)
+    csrw mtvec, a0		// CSR write addr to mtvec reg  
+    csrs mtvec, 1		// CSR set mode bit to Vectored mode(01)
 
     .option push
     .option norelax
