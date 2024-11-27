@@ -157,6 +157,8 @@
 // -----------------------------------------------------------------------------
 #define SIGN_BASE 0x30000000
 #define KEY_BASE  0x30001000
+#define SIGN_DATA
+#define SIGN_DATA_SIZE
 
 
 

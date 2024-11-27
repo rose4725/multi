@@ -26,13 +26,13 @@
 // -----------------------------------------------------------------------------
 #define UART_BASE 	0x10013000UL
 
-#define UART_TXFIFO 0x00
-#define UART_RXFIFO 0x04
-#define UART_TXCTRL 0x08
-#define UART_RXCTRL 0x0c
-#define UART_IE 	0x10
-#define UART_IP 	0x14
-#define UART_DIV 	0x18
+#define UART_TXFIFO 0x00	//Transmit FIFO
+#define UART_RXFIFO 0x04	//Receive FIFO
+#define UART_TXCTRL 0x08	//TX Control
+#define UART_RXCTRL 0x0c	//Receive Contol
+#define UART_IE 	0x10	//Interrupt Enable
+#define UART_IP 	0x14	//Interrupt P
+#define UART_DIV 	0x18	//DIV Divergence..?
 
 #define UART_IRQ    11 // PLIC_SRC_UART 3
 
